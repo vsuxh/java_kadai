@@ -1,0 +1,228 @@
+4J 21番 高島 唯琉 テーマ07 レポート
+
+1.
+class Kosensei
+{
+    int gakunen;   // 学年: 1〜5の整数
+    String bunnya; // 分野: "情報", "機械", "電気", "電子", "建築"のいずれかの文字列
+    String namae;  // 名前: 文字列
+
+    Kosensei(int grade, String major, String name){
+	this.gakunen = grade;
+	this.bunnya = major;
+	this.namae = name;
+    }
+
+    void shokai() // 通常版
+    {
+        // gakunen, bunnya, namaeはthis(主たるインスタンス)のフィールドを使う.
+        System.out.println("私は" + this.gakunen + "年" + this.bunnya + "の" + this.namae + "です.");
+    }
+    static void shokai(Kosensei a) // static版
+    {
+        // gakunen, bunnya, namaeは引数aのフィールドを使う.
+        System.out.println("彼は" + a.gakunen + "年" + a.bunnya + "の" + a.namae + "さんです.");
+    }
+}
+
+
+class KosenseiApp
+{
+    public static void main(String[] args)
+    {
+        Kosensei jotaro = new Kosensei(4, "情報", "じょうたろう");
+        Kosensei josuke = new Kosensei(3, "情報", "じょうすけ");
+        jotaro.shokai(); // 通常版メソッドを呼び出す
+        josuke.shokai(); // 通常版メソッドを呼び出す
+        Kosensei.shokai(jotaro); // static版メソッドを呼び出す
+        Kosensei.shokai(josuke); // static版メソッドを呼び出す
+    }
+}
+
+2.
+class Kosensei
+{
+    int gakunen;   // 学年: 1〜5の整数
+    String bunnya; // 分野: "情報", "機械", "電気", "電子", "建築"のいずれかの文字列
+    String namae;  // 名前: 文字列
+    String jukyo;
+
+    Kosensei(int grade, String major, String name, String residence){
+	this.gakunen = grade;
+	this.bunnya = major;
+	this.namae = name;
+	this.jukyo = residence;
+    }
+
+    void shokai() // 通常版
+    {
+        // gakunen, bunnya, namaeはthis(主たるインスタンス)のフィールドを使う.
+        System.out.println("私は" + this.gakunen + "年" + this.bunnya + "の" + this.namae + "です.私の住居は" +  this.jukyo + "です.");
+    }
+    static void shokai(Kosensei a) // static版
+    {
+        // gakunen, bunnya, namaeは引数aのフィールドを使う.
+        System.out.println("彼は" + a.gakunen + "年" + a.bunnya + "の" + a.namae + "さんです.私の住居は" + a.jukyo + "です.");
+    }
+}
+
+class KosenseiApp
+{
+    public static void main(String[] args)
+    {
+        Kosensei jotaro = new Kosensei(4, "情報", "じょうたろう", "寮");
+        Kosensei josuke = new Kosensei(3, "情報", "じょうすけ", "下宿");
+        jotaro.shokai(); // 通常版メソッドを呼び出す
+        josuke.shokai(); // 通常版メソッドを呼び出す
+        Kosensei.shokai(jotaro); // static版メソッドを呼び出す
+        Kosensei.shokai(josuke); // static版メソッドを呼び出す
+    }
+}
+コンパイル〜実行
+p220085@jks24:~/java/day7$ javac Kosensei.java KosenseiApp.java 
+p220085@jks24:~/java/day7$ java KosenseiApp
+私は4年情報のじょうたろうです.私の住居は寮です.
+私は3年情報のじょうすけです.私の住居は下宿です.
+彼は4年情報のじょうたろうさんです.私の住居は寮です.
+彼は3年情報のじょうすけさんです.私の住居は下宿です.
+p220085@jks24:~/java/day7$
+
+
+3.
+class Kosensei
+{
+    int gakunen;   // 学年: 1〜5の整数
+    String bunnya; // 分野: "情報", "機械", "電気", "電子", "建築"のいずれかの文字列
+    String namae;  // 名前: 文字列
+    String jukyo;
+
+    Kosensei(int grade, String major, String name, String residence){
+	this.gakunen = grade;
+	this.bunnya = major;
+	this.namae = name;
+	this.jukyo = residence;
+    }
+
+    void shokai() // 通常版
+    {
+        // gakunen, bunnya, namaeはthis(主たるインスタンス)のフィールドを使う.
+        System.out.println("私は" + this.gakunen + "年" + this.bunnya + "の" + this.namae + "です.私の住居は" +  this.jukyo + "です.");
+    }
+    static void shokai(Kosensei a) // static版
+    {
+        // gakunen, bunnya, namaeは引数aのフィールドを使う.
+        System.out.println("彼は" + a.gakunen + "年" + a.bunnya + "の" + a.namae + "さんです.私の住居は" + a.jukyo + "です.");
+    }
+
+    void hantei(Kosensei b){
+    	if(this.namae.equals(b.namae)){
+		System.out.println("私「" + this.namae + "」と「" + b.namae + "は通学仲間です.");
+	}else{
+		System.out.println("私「" + this.namae + "」と「" + b.namae + "」は通学仲間ではありません.");
+	}
+    }
+    static void hantei(Kosensei a, Kosensei b){
+        if(a.namae.equals(b.namae)){
+                System.out.println("私「" + a.namae + "」と「" + b.namae + "は通学仲間です.");
+        }else{
+                System.out.println("私「" + a.namae + "」と「" + b.namae + "は通学仲間ではありません.");
+        }
+    }
+
+}
+class KosenseiApp
+{
+    public static void main(String[] args)
+    {
+        Kosensei jej = new Kosensei(4, "電気", "ジョンソンエンドジョンソン", "寮");
+        Kosensei jonson = new Kosensei(3, "建築", "ジョンソン", "下宿");
+	Kosensei json = new Kosensei(5, "建築", "ジェイソン", "下宿");
+        jej.shokai(); // 通常版メソッドを呼び出す
+        jonson.shokai(); // 通常版メソッドを呼び出す
+	jej.hantei(jonson);	
+        Kosensei.shokai(jonson); // static版メソッドを呼び出す
+        Kosensei.shokai(json); // static版メソッドを呼び出す
+	Kosensei.hantei(jonson, json);
+    }
+}
+
+コンパイル〜実行
+p220085@jks24:~/java/day7$ javac Kosensei.java KosenseiApp.java 
+p220085@jks24:~/java/day7$ java KosenseiApp
+私は4年電気のジョンソンエンドジョンソンです.私の住居は寮です.
+私は3年建築のジョンソンです.私の住居は下宿です.
+私「ジョンソンエンドジョンソン」と「ジョンソン」は通学仲間ではありません.
+彼は3年建築のジョンソンさんです.私の住居は下宿です.
+彼は5年建築のジェイソンさんです.私の住居は下宿です.
+私「ジョンソン」と「ジェイソン」は通学仲間ではありません.
+p220085@jks24:~/java/day7$ 
+
+
+4.
+class Kosensei
+{
+    int gakunen;   // 学年: 1〜5の整数
+    String bunnya; // 分野: "情報", "機械", "電気", "電子", "建築"のいずれかの文字列
+    String namae;  // 名前: 文字列
+    String jukyo;
+
+    Kosensei(int grade, String major, String name, String residence){
+	this.gakunen = grade;
+	this.bunnya = major;
+	this.namae = name;
+	this.jukyo = residence;
+    }
+
+    void shokai() // 通常版
+    {
+        // gakunen, bunnya, namaeはthis(主たるインスタンス)のフィールドを使う.
+        System.out.println("私は" + this.gakunen + "年" + this.bunnya + "の" + this.namae + "です.私の住居は" +  this.jukyo + "です.");
+    }
+    static void shokai(Kosensei a) // static版
+    {
+        // gakunen, bunnya, namaeは引数aのフィールドを使う.
+        System.out.println("彼は" + a.gakunen + "年" + a.bunnya + "の" + a.namae + "さんです.私の住居は" + a.jukyo + "です.");
+    }
+
+    void hantei(Kosensei b){
+    	if(this.namae.equals(b.namae)){
+		System.out.println("私「" + this.namae + "」と「" + b.namae + "」は通学仲間です.");
+	}else{
+		System.out.println("私「" + this.namae + "」と「" + b.namae + "」は通学仲間ではありません.");
+	}
+    }
+    static void hantei(Kosensei a, Kosensei b){
+        if(a.namae.equals(b.namae)){
+                System.out.println("私「" + a.namae + "」と「" + b.namae + "」は通学仲間です.");
+        }else{
+                System.out.println("私「" + a.namae + "」と「" + b.namae + "」は通学仲間ではありません.");
+        }
+    }
+    void shinkyu(){
+    	this.gakunen = this.gakunen + 1;
+	System.out.println("やったー" + this.namae + "は" + this.gakunen + "年に進級したでゲス.");
+	if(this.gakunen == 6) System.out.println("ん?" + this.gakunen + "年はおかしいでゲスね." + this.namae + "は卒業したか専攻科に投げ入れられたでゲス.");
+    }
+    static void shinkyu(Kosensei a){
+        a.gakunen = a.gakunen + 1;
+        System.out.println("やったー" + a.namae + "は" + a.gakunen + "年に進級したでゲス.");
+	if(a.gakunen == 6) System.out.println("ん?" + a.gakunen + "年はおかしいでゲスね." + a.namae + "は卒業したか専攻科に投げ入れられたでゲス.");
+    }
+
+}
+static版はフィールドを変数として受け取って処理していて、通常版はフィールド内の処理として行われている。
+
+実行
+p220085@jks24:~/java/day7$ java KosenseiApp
+私は4年電気のジョンソンエンドジョンソンです.私の住居は寮です.
+私は3年建築のジョンソンです.私の住居は下宿です.
+私「ジョンソンエンドジョンソン」と「ジョンソン」は通学仲間ではありません.
+彼は3年建築のジョンソンさんです.私の住居は下宿です.
+彼は5年建築のジェイソンさんです.私の住居は下宿です.
+私「ジョンソン」と「ジェイソン」は通学仲間ではありません.
+やったージェイソンは6年に進級したでゲス.
+ん?6年はおかしいでゲスね.ジェイソンは卒業したか専攻科に投げ入れられたでゲス.
+やったージョンソンは4年に進級したでゲス.
+p220085@jks24:~/java/day7$ 
+
+
