@@ -1,0 +1,137 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>プログラミング言語IIIA(Java) テーマ06</title>
+<link rel="stylesheet" href="%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9EIIIA(Java)%20%E3%83%86%E3%83%BC%E3%83%9E06_files/tenmo2008single.css" type="text/css" media="all">
+</head>
+
+<body>
+
+<h2>プログラミング言語IIIA(Java) テーマ06</h2>
+
+<h3>内容</h3>
+
+<ul>
+<li>メソッド(関数)の作り方・呼び出し方を復習する.</li>
+<li>基本的なクラスとコンストラクタの使い方を復習する.</li>
+</ul>
+
+<h3>課題</h3>
+
+<p>以下の課題のレポートは, レポートファイル<code class="em">report06.txt</code>を作成してアップロードにより提出すること. なお, 今回のレポートに記載が必要な事項は, 全てプログラムのソースコードのみである.</p>
+
+<ol>
+
+<li>コマンドライン引数から三角形の<u>高さ</u>と<u>底辺の長さ</u>を実数で入力し, <u>面積</u>を出力するプログラムを作成せよ. 以下の条件を満たす様に作成すること.
+    <ul>
+    <li>ソースファイル名: Kadai01.java ※今回はソースファイル一つで作成する.</li>
+    <li>クラス名: Kadai01</li>
+    <li>面積を計算するメソッドのメソッド名: calcArea</li>
+    <li>calcAreaメソッドの引数: double型二つ</li>
+    <li>calcAreaメソッドの戻り値: double型</li>
+    <li>staticメソッドとして作成すること. フィールドなし. コンストラクタなし.</li>
+<pre>    class Kadai01
+    {
+        static 戻り値の型 calcArea(引数の型 引数の変数名, 引数の型 引数の変数名)
+        {
+            ...    ↓この部分の「型」を上の「戻り値の型」の所に書く.
+            return ...;
+        }
+        public static void main(String[] args)
+        {
+            double arg0 = Double.parseDouble(args[0]);
+            double arg1 = Double.parseDouble(args[1]);
+            ...
+        }
+    }
+</pre>
+<pre>$ javac Kadai01.java
+$ java Kadai01 3.0 4.0
+</pre>
+    <li>標準出力に出力するメソッドにはSystem.out.println(〜)を利用すること. ※以下同様.</li>
+    <li>calcAreaメソッドの中では面積を出力しないこと.</li>
+    <li><u>main側で</u>calcAreaメソッドの戻り値をdouble型のローカル変数で<u>受け取って</u>から出力すること.</li>
+    <li>args[0]などのString型をdouble型に変換するメソッドにはDouble.parseDouble(〜)を利用すること. ※以下同様.</li>
+    </ul>
+</li>
+
+<li>コマンドライン引数から5科目のテストの点数を<u>整数</u>で入力し, その平均点(実数)を出力するプログラムを作成せよ. 以下の条件を満たす様に作成すること.
+    <ul>
+    <li>ソースファイル名: Kadai02.java ※ソースファイル一つで作成する.</li>
+    <li>クラス名: Kadai02</li>
+    <li>平均点を計算するメソッドのメソッド名: calcAverage</li>
+    <li>calcAverageメソッドの引数: int型5つ</li>
+    <li>calcAverageメソッドの戻り値: double型</li>
+    <li>staticメソッドとして作成すること. フィールドなし. コンストラクタなし.</li>
+    <li>calcAverageメソッドの中では平均点を出力しないこと.</li>
+    <li>main側でcalcAverageメソッドの戻り値をdouble型のローカル変数で受け取ってから出力すること.</li>
+    <li>args[0]などのString型をint型に変換するメソッドにはInteger.parseInt(〜)を利用すること. ※以下同様.</li>
+    </ul>
+</li>
+
+<li>コマンドライン引数から<u>整数</u>を1つ入力し, その値に応じて次の様な値を出力するプログラムを作成せよ. 以下の条件を満たす様に作成すること.
+    <ul>
+    <li>値が偶数だった場合0</li>
+    <li>値が奇数だった場合1</li>
+    </ul>
+    <ul>
+    <li>ソースファイル名: Kadai03.java ※ソースファイル一つで作成する.</li>
+    <li>クラス名: Kadai03</li>
+    <li>偶数か奇数かを判定して0か1を返すメソッドのメソッド名: isOdd ※イズオッド</li>
+    <li>isOddメソッドの引数: int型1つ</li>
+    <li>isOddメソッドの戻り値: int型</li>
+    <li>staticメソッドとして作成すること. フィールドなし. コンストラクタなし.</li>
+    <li>isOddメソッドの中では判定結果を出力しないこと.</li>
+    <li>main側でisOddメソッドの戻り値をint型のローカル変数で受け取ってから出力すること.</li>
+    </ul>
+</li>
+
+<li>コマンドライン引数から整数を入力し, その値に応じて次の様な値を出力するプログラムを作成せよ. 以下の条件を満たす様に作成すること.
+    <ul>
+    <li>値が18未満の場合1</li>
+    <li>それ以外の場合0</li>
+    </ul>
+    <ul>
+    <li>ソースファイル名: Kadai04.java ※ソースファイル一つで作成する.</li>
+    <li>クラス名: Kadai04</li>
+    <li>18未満の値かどうかを判定して0か1を返すメソッドのメソッド名: isUnder18</li>
+    <li>isUnder18メソッドの引数: int型1つ</li>
+    <li>isUnder18メソッドの戻り値: int型</li>
+    <li>staticメソッドとして作成すること. フィールドなし. コンストラクタなし.</li>
+    <li>isUnder18メソッドの中では判定結果を出力しないこと.</li>
+    <li>main側でisUnder18メソッドの戻り値をint型のローカル変数で受け取ってから出力すること.</li>
+    </ul>
+</li>
+
+<li>以下の仕様を満たす, 整数値の座標を表す MyPoint クラスを作成せよ. (main ではない)
+
+<ul>
+<li>ファイル名: MyPoint.java</li>
+<li>クラス名: MyPoint</li>
+<li>フィールド: int 型で x と y と z</li>
+<li>コンストラクタ: int 型の x と y と z を引数で受け取り, それぞれフィールドの x と y と z に代入する</li>
+<li>メソッド: メソッド名 print, 引数無し, 戻り値無し, フィールドの x と y と z の値を標準出力へ出力する</li>
+<li>※この課題では static はどこにも付けない.</li>
+</ul></li>
+
+<li>以下の仕様を満たす, 課題5の MyPoint クラスを用いる main メソッドのみを含む MyPointApp クラスを作成せよ.
+
+<ul>
+<li>ファイル名: MyPointApp.java</li>
+<li>クラス名: MyPointApp</li>
+<li>メソッド: public static void main(String[] args)</li>
+<li>コマンドライン引数から三つの整数を入力する(自動的に args[0] と args[1] と args[2] に入ってくる)</li>
+<li>args[0] を整数型に変換し, ローカル変数 x に代入する</li>
+<li>args[1] を整数型に変換し, ローカル変数 y に代入する</li>
+<li>args[2] を整数型に変換し, ローカル変数 z に代入する</li>
+<li>オブジェクト変数 mp を宣言する</li>
+<li>ローカル変数 x と y と z を MyPoint クラスのコンストラクタへ渡し, インスタンスのアドレスを mp に代入する</li>
+<li>mp に対して print メソッドを呼び出す</li>
+</ul></li>
+
+</ol>
+
+
+
+</body></html>
