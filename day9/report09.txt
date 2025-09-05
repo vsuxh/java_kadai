@@ -1,0 +1,65 @@
+
+1.
+public class Kosensei
+{
+    private int gakunen;
+    private String bunnya;
+    private String namae;
+
+    public Kosensei(int year, String major, String name){
+    	this.gakunen = year;
+    	this.bunnya = major;
+    	this.namae = name;
+    }
+
+    public int getGakunen() {return this.gakunen;}
+    public String getBunnya() {return this.bunnya;}
+    public String getNamae (){return this.namae;}
+    public void shokai(){
+        	System.out.println("私は" + this.gakunen + "年" + this.bunnya + "の" + this.namae + "です.ふぁっきゅー");
+    }
+}
+class KosenseiApp
+{
+    public static void main(String args[])
+    {
+    	Kosensei pepsi = new Kosensei(3, "情報", "ペプシメン");
+    	pepsi.shokai();
+    }
+}
+
+実行
+p220085@jks24:~/java/day9$ javac Kosensei.java KosenseiApp.java 
+p220085@jks24:~/java/day9$ java KosenseiApp
+私は3年情報のペプシメンです.ふぁっきゅー
+p220085@jks24:~/java/day9$ 
+
+2.
+public class kotsu extends Kosensei{
+	private String kotsu;
+	public kotsu(int year, String major, String name, String kotsu){
+		super(year, major, name);
+		this.kotsu = kotsu;
+	}
+        public kotsu(int year, String major, String name){
+                super(year, major, name);
+                this.kotsu = null;
+        }
+	
+	public String getKotsu(){return this.kotsu;}
+	public void shokai(){
+		System.out.println("私は" + super.getGakunen() + "年" + super.getBunnya() + "の" + super.getNamae() + "です.私は" +  this.kotsu + "で通っています.ふぁっきゅー");
+	}
+}
+public class tusei{
+	public static void main(String[] args){
+		kotsu pepsi = new kotsu(3, "情報", "ペプシメン", "バス");
+		pepsi.shokai();
+
+	}
+}
+実行
+p220085@jks24:~/java/day9$ javac Kosensei.java KosenseiApp.java kotsu.java tusei.java
+p220085@jks24:~/java/day9$ java tusei
+私は3年情報のペプシメンです.私はバスで通っています.ふぁっきゅー
+p220085@jks24:~/java/day9$
