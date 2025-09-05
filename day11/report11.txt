@@ -1,0 +1,46 @@
+4j 21番 高島 唯琉 テーマ11 レポート
+
+1.
+public class ArrayListIntApp {
+	public static void main(String[] args){
+		ArrayListInt list = new ArrayListInt();
+		{list.add(314); list.add(271); list.add(173);}
+		{list.print();}
+	}	
+}
+public class ArrayListInt {
+	private int saidai;
+	private int[] a;
+	private int jissai;
+	public ArrayListInt() {
+		this.saidai = 5;
+		this.a = new int[this.saidai];
+		this.jissai = 0;
+	}
+	public void add(int x) {
+		if (this.jissai <= 5){
+			this.a[jissai] = x;
+			this.jissai +=1;
+		} else {System.out.println("格納上限ぞよ");}
+	}
+
+	public int getSize() {return this.jissai;}
+	public int getShell(int x) {return this.a[x];}
+
+	public void print(){
+		int i;
+		for(i=0;i<jissai;i++){
+			System.out.println(a[i]);
+		}
+	}
+}
+
+実行の様子
+p220085@jks24:~/java/day11$ javac ArrayListIntApp.java ArrayListInt.java 
+p220085@jks24:~/java/day11$ java ArrayListIntApp
+314
+271
+173
+p220085@jks24:~/java/day11$
+
+2.
