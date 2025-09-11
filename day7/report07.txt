@@ -226,3 +226,109 @@ p220085@jks24:~/java/day7$ java KosenseiApp
 p220085@jks24:~/java/day7$ 
 
 
+5.
+Pet.java
+class Pet {
+    String name;
+    int energy;   // 元気
+    int hunger;   // 空腹度 (0が満腹、100が空腹MAX)
+
+    // コンストラクタ
+    Pet(String name) {
+        this.name = name;
+        this.energy = 50;
+        this.hunger = 50;
+    }
+
+    // 状態表示
+    void showStatus() {
+        System.out.println(this.name + " の状態: 元気=" + this.energy + ", 空腹度=" + this.hunger);
+    }
+
+    // 遊ぶ（元気が減り、空腹度が増える）
+    void play() {
+        this.energy -= 10;
+        this.hunger += 20;
+        if (this.energy < 0) this.energy = 0;
+        if (this.hunger > 100) this.hunger = 100;
+        System.out.println(this.name + " と遊んだ！");
+    }
+
+    // ご飯を食べる（元気が回復し、空腹度が減る）
+    void eat() {
+        this.hunger -= 30;
+        this.energy += 10;
+        if (this.hunger < 0) this.hunger = 0;
+        if (this.energy > 100) this.energy = 100;
+        System.out.println(this.name + " にご飯をあげた！");
+    }
+}
+
+PetApp.java
+public class PetApp {
+    public static void main(String[] args) {
+        // ペットを作成
+        Pet pochi = new Pet("ポチ");
+
+        // 初期状態
+        pochi.showStatus();
+
+        // 遊ぶ
+        pochi.play();
+        pochi.showStatus();
+
+        // さらに遊ぶ
+        pochi.play();
+        pochi.showStatus();
+
+        // ご飯をあげる
+        pochi.eat();
+        pochi.showStatus();
+    }
+}
+
+~実行~
+ポチ の状態: 元気=50, 空腹度=50
+ポチ と遊んだ！
+ポチ の状態: 元気=40, 空腹度=70
+ポチ と遊んだ！
+ポチ の状態: 元気=30, 空腹度=90
+ポチ にご飯をあげた！
+ポチ の状態: 元気=40, 空腹度=60
+
+解説
+今回作成したプログラムは、身近な存在であるペットを題材にしたクラスである。
+
+(1) クラス構成
+
+フィールド
+name（ペットの名前）
+energy（元気の度合い。0〜100）
+hunger（空腹度。0が満腹、100が限界）
+ペットの状態を表現する属性として、これらを用意した。
+
+コンストラクタ
+Pet(String name) でペットを生成する際に名前を設定し、元気と空腹度を初期値50にした。
+
+(2) メソッド
+
+showStatus()
+ペットの現在の状態（元気・空腹度）を表示する。
+
+play()
+ペットと遊ぶ処理。元気が10減り、空腹度が20増える。フィールドの値が更新される点がポイント。
+元気は0未満にならず、空腹度は100を超えないように制御している。
+
+eat()
+ペットにご飯をあげる処理。空腹度が30減り、元気が10回復する。
+空腹度は0未満にならず、元気は100を超えないように制御している。
+
+(3) 実行の流れ
+ペット「ポチ」を生成し、初期状態を表示する。
+play() を呼び出すことで、元気と空腹度の値が変化することを確認する。
+さらに遊んだ後に、eat() を呼び出すことでご飯を食べた効果を確認する。
+
+(4) まとめ
+この課題では、フィールドを持ち、メソッド呼び出しによって属性が更新されるクラスを実装した。
+身近な題材であるペットを用いたことで、プログラムの動きがイメージしやすくなった。
+今回のようにフィールドとメソッドを対応づけると、現実の対象をプログラムで表現しやすくなることが分かった。
