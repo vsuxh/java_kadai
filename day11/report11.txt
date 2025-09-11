@@ -44,3 +44,126 @@ p220085@jks24:~/java/day11$ java ArrayListIntApp
 p220085@jks24:~/java/day11$
 
 2.
+public class Kosensei {
+    private int gakunen;
+    private String bunnya;
+    private String namae;
+
+    public Kosensei(int year, String major, String name){
+        this.gakunen = year;
+        this.bunnya = major;
+        this.namae = name;
+    }
+
+    public int getGakunen() {return this.gakunen;}
+    public String getBunnya() {return this.bunnya;}
+    public String getNamae (){return this.namae;}
+
+    public void shokai(){
+        System.out.println("私は" + this.gakunen + "年" + this.bunnya + "の" + this.namae + "です.");
+    }
+}
+
+public class Tsuugakusei extends Kosensei {
+    private String basyo;
+
+    public Tsuugakusei(int year, String major, String name, String basyo){
+        super(year, major, name);
+        this.basyo = basyo;
+    }
+
+    public String getBasyo(){ return this.basyo; }
+
+    @Override
+    public void shokai(){
+        System.out.println("私は" + getGakunen() + "年" + getBunnya() + "の" + getNamae() + "です. 通学場所は" + basyo + "です.");
+    }
+}
+
+public class Ryosei extends Kosensei {
+    private Ryosei doshitsusha;
+
+    public Ryosei(int year, String major, String name){
+        super(year, major, name);
+        this.doshitsusha = null;
+    }
+
+    public Ryosei getDoshitsusha(){ return this.doshitsusha; }
+
+    public void setDoshitsusha(Ryosei r){
+        this.doshitsusha = r;
+        r.doshitsusha = this;
+    }
+
+    @Override
+    public void shokai(){
+        String mate = (doshitsusha == null) ? "なし" : doshitsusha.getNamae();
+        System.out.println("私は" + getGakunen() + "年" + getBunnya() + "の" + getNamae() + "です. 同室者: " + mate);
+    }
+}
+
+// Gakkyu.java
+public class Gakkyu {
+    private int saidai;
+    private Kosensei[] a;
+    private int jissai;
+
+    public Gakkyu(){
+        this.saidai = 5;
+        this.a = new Kosensei[this.saidai];
+        this.jissai = 0;
+    }
+
+    public void add(Kosensei k){
+        if (this.jissai < this.saidai){
+            this.a[jissai] = k;
+            this.jissai++;
+        } else {
+            System.out.println("これ以上追加できません!");
+        }
+    }
+
+    public int size(){
+        return this.jissai;
+    }
+
+    public Kosensei get(int i){
+        return this.a[i];
+    }
+
+    public void shokai(){
+        for (int i=0; i<jissai; i++){
+            a[i].shokai();
+        }
+    }
+}
+
+// GakkyuApp.java
+public class GakkyuApp {
+    public static void main(String[] args){
+        Gakkyu g = new Gakkyu();
+
+        Tsuugakusei t1 = new Tsuugakusei(2, "機械", "佐藤", "大阪");
+        Tsuugakusei t2 = new Tsuugakusei(1, "情報", "鈴木", "京都");
+
+        Ryosei r1 = new Ryosei(3, "電気", "田中");
+        Ryosei r2 = new Ryosei(3, "電気", "山田");
+        r1.setDoshitsusha(r2);
+
+        g.add(t1);
+        g.add(t2);
+        g.add(r1);
+        g.add(r2);
+
+        System.out.println("=== 学級の自己紹介 ===");
+        g.shokai();
+        System.out.println("人数: " + g.size());
+    }
+}
+
+=== 学級の自己紹介 ===
+私は2年機械の佐藤です. 通学場所は大阪です.
+私は1年情報の鈴木です. 通学場所は京都です.
+私は3年電気の田中です. 同室者: 山田
+私は3年電気の山田です. 同室者: 田中
+人数: 4
