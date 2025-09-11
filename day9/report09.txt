@@ -63,3 +63,80 @@ p220085@jks24:~/java/day9$ javac Kosensei.java KosenseiApp.java kotsu.java tusei
 p220085@jks24:~/java/day9$ java tusei
 私は3年情報のペプシメンです.私はバスで通っています.ふぁっきゅー
 p220085@jks24:~/java/day9$
+
+3.
+public class Ryosei extends Kosensei {
+    // フィールド
+    private Ryosei doshitsusha;
+
+    // コンストラクタ (学年, 分野, 名前)
+    public Ryosei(int year, String major, String name) {
+        super(year, major, name); 
+        this.doshitsusha = null;  
+    }
+
+    public Ryosei getDoshitsusha() {
+        return this.doshitsusha;
+    }
+
+    public void setDoshitsusha(Ryosei partner) {
+        this.doshitsusha = partner;
+    }
+
+    public void shokai() {
+        System.out.print("私は" + getGakunen() + "年" + getBunnya() + "の" + getNamae() + "です.");
+        if (this.doshitsusha != null) {
+            System.out.println(" 同室者は " + this.doshitsusha.getNamae() + " です.");
+        } else {
+            System.out.println(" 同室者はいません.");
+        }
+    }
+}
+
+
+public class RyoseiApp {
+    public static void main(String[] args) {
+        Ryosei r1 = new Ryosei(2, "情報", "太郎");
+        Ryosei r2 = new Ryosei(3, "機械", "次郎");
+
+        System.out.println("=== 同室者を設定する前 ===");
+        r1.shokai();
+        r2.shokai();
+
+        r1.setDoshitsusha(r2);
+        r2.setDoshitsusha(r1);
+
+        System.out.println("=== 同室者を設定した後 ===");
+        r1.shokai();
+        r2.shokai();
+    }
+}
+
+
+~実行~
+PS C:\Users\gaoda\java\jikken> javac Ryosei.java RyoseiApp.java
+PS C:\Users\gaoda\java\jikken> java RyoseiApp
+=== 同室者を設定する前 ===
+私は2年情報の太郎です. 同室者はいません.
+私は3年機械の次郎です. 同室者はいません.
+=== 同室者を設定した後 ===
+私は2年情報の太郎です. 同室者は 次郎 です.
+私は3年機械の次郎です. 同室者は 太郎 です.
+PS C:\Users\gaoda\java\jikken>
+
+4.
+public void setDoshitsusha(Ryosei partner) {
+    this.doshitsusha = partner;
+    partner.doshitsusha = this;
+}
+
+~実行~
+PS C:\Users\gaoda\java\jikken> javac Ryosei.java RyoseiApp.java
+PS C:\Users\gaoda\java\jikken> java RyoseiApp
+=== 同室者を設定する前 ===
+私は2年情報の太郎です. 同室者はいません.
+私は3年機械の次郎です. 同室者はいません.
+=== 同室者を設定した後 ===
+私は2年情報の太郎です. 同室者は 次郎 です.
+私は3年機械の次郎です. 同室者は 太郎 です.
+PS C:\Users\gaoda\java\jikken>
