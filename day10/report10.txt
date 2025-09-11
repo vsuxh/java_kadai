@@ -1,3 +1,114 @@
 
 
-私は"ゲームソフト"は"パッケージ版/ダウンロード版"という関係の下作成しました
+動物 → 哺乳類 → 猫科動物 → 家猫といったように四段階継承の元作りました
+IS-A関係は家猫は猫科動物である」「猫科動物は哺乳類である」「哺乳類は動物である」といった形で達成されています
+
+class Animal {
+    private String name;
+    private int age;
+    private String voice;
+
+    public Animal(String name, int age, String voice){
+        this.name = name;
+        this.age = Math.max(0, age);
+        this.voice = voice;
+    }
+
+    public String getName(){ return this.name; }
+    public int getAge(){ return this.age; }
+    public String getVoice(){ return this.voice; }
+
+    public void describe(){
+        System.out.println("Animal: " + name + " (" + age + "歳) 声: " + voice);
+    }
+}
+
+class Mammal extends Animal {
+    private boolean milkFeeding;
+
+    public Mammal(String name, int age, String voice, boolean milkFeeding){
+        super(name, age, voice);
+        this.milkFeeding = milkFeeding;
+    }
+
+    public boolean canMilkFeed(){ return this.milkFeeding; }
+
+    @Override
+    public void describe(){
+        System.out.println("Mammal: " + getName() + " (" + getAge() + "歳) 声: " + getVoice() 
+                           + " 乳で子を育てる: " + (milkFeeding ? "はい" : "いいえ"));
+    }
+}
+
+class Felidae extends Mammal {
+    private boolean hunter;
+
+    public Felidae(String name, int age, String voice, boolean milkFeeding, boolean hunter){
+        super(name, age, voice, milkFeeding);
+        this.hunter = hunter;
+    }
+
+    public boolean isHunter(){ return this.hunter; }
+
+    @Override
+    public void describe(){
+        System.out.println("Felidae: " + getName() + " (" + getAge() + "歳) 声: " + getVoice() 
+                           + " 狩猟本能: " + (hunter ? "あり" : "なし"));
+    }
+}
+
+class HouseCat extends Felidae {
+    private String owner;
+
+    public HouseCat(String name, int age, String voice, boolean milkFeeding, boolean hunter, String owner){
+        super(name, age, voice, milkFeeding, hunter);
+        this.owner = owner;
+    }
+
+    public String getOwner(){ return this.owner; }
+
+    @Override
+    public void describe(){
+        System.out.println("HouseCat: " + getName() + " (" + getAge() + "歳) 声: " + getVoice()
+                           + " 飼い主: " + owner);
+    }
+
+    public void purr(){
+        System.out.println(getName() + " はゴロゴロと甘えている。");
+    }
+}
+
+public class AnimalApp {
+    public static void main(String[] args){
+        Animal a = new Animal("Creature", 5, "???");
+        Mammal m = new Mammal("Dolphin", 12, "キュー", true);
+        Felidae f = new Felidae("Tiger", 7, "ガオー", true, true);
+        HouseCat c = new HouseCat("Momo", 3, "ニャー", true, true, "Yuki");
+
+        System.out.println("=== 個別 describe ===");
+        a.describe();
+        m.describe();
+        f.describe();
+        c.describe();
+        c.purr();
+
+        System.out.println("=== ポリモーフィズム (Animal配列) ===");
+        Animal[] list = { a, m, f, c };
+        for(Animal x : list) x.describe();
+    }
+}
+
+~実行~
+PS C:\Users\gaoda\java\jikken>javac Animal.java Mammal.java Felidae.java HouseCat.java AnimalApp.java 
+PS C:\Users\gaoda\java\jikken>AnimalApp
+=== 個別 describe ===
+Animal: Creature (5歳) 声: ???
+Mammal: Dolphin (12歳) 声: キュー 乳で子を育てる: はい
+Felidae: Tiger (7歳) 声: ガオー 狩猟本能: あり
+HouseCat: Momo (3歳) 声: ニャー 飼い主: Yuki
+Momo はゴロゴロと甘えている。
+=== ポリモーフィズム (Animal配列) ===
+Animal: Creature (5歳) 声: ???
+Mammal: Dolphin (12歳) 声: キュー 乳で子を育てる: はい
+Felidae: Tiger (7歳) 声: ガオー 狩猟本能: あり
+HouseCat: Momo (3歳) 声: ニャー 飼い主: Yuki
