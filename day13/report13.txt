@@ -1,0 +1,39 @@
+4J 21番 高島唯琉 テーマ13 レポート
+
+1.
+cのcursisよか引数あたりがスッキリしてると思った。引数が無駄に多ければシンプルこんがらがるし経験が少ない私にとってはとてもありがたい。
+
+2.
+public class AppTest4 extends JFrame implements ActionListener{
+	private JButton button;
+	public AppTest4(){
+		super(); 
+		this.button = new JButton("押さんかい");
+		super.getContentPane().add(this.button);
+		this.button.addActionListener(this);
+	}
+
+	public void actionPerformed(ActionEvent e){
+		if(e.getSource() == this.button){
+			System.out.println("nu");
+			this.button.setText("fuck");
+		}
+	}
+
+	public static void main(String[] args){
+		AppTest4 a = new AppTest4();
+		a.setSize(300, 300);
+		a.setLocation(0,0);
+		a.setVisible(true);
+	}
+
+}
+
+public void setText(String text)
+
+ボタンのテキストを設定します。
+
+パラメータ:
+    text - テキストの設定に使用する文字列
+
+と、割と適当に振り回していいよくあるセッターだったのでとりあえずpublic void actionPerformed(ActionEvent e)の処理に突っ込むことにした。「ボタンが押されたときに」といった条件で、条件達成後の処理が作られているというなんともたまたま偶然100%ラッキーな都合のいい処理だったのでここが一番いいなと突っ込んだあとに思った。
