@@ -37,3 +37,38 @@ public void setText(String text)
     text - テキストの設定に使用する文字列
 
 と、割と適当に振り回していいよくあるセッターだったのでとりあえずpublic void actionPerformed(ActionEvent e)の処理に突っ込むことにした。「ボタンが押されたときに」といった条件で、条件達成後の処理が作られているというなんともたまたま偶然100%ラッキーな都合のいい処理だったのでここが一番いいなと突っ込んだあとに思った。
+
+3.
+import javax.swing.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class AppTest5 extends JFrame implements ActionListener{
+        private JButton button;
+        public AppTest5(){
+                super();
+                this.button = new JButton("押さんかい");
+//              super.getContentPane().add(this.button);
+                super.getContentPane().setLayout(null);
+                this.button.addActionListener(this);
+                this.button.setBounds(0, 0, 300, 300);
+                super.getContentPane().add(button);
+        }
+
+        public void actionPerformed(ActionEvent e){
+                if(e.getSource() == this.button){
+                        System.out.println("nu");
+                        this.button.setText("fuck");
+                }
+        }
+
+        public static void main(String[] args){
+                AppTest5 a = new AppTest5();
+                a.setSize(300, 300);
+                a.setLocation(0,0);
+                a.setVisible(true);
+        }
+
+}
+
+4.今後はcで書いたときよりも色をつけてみたい
