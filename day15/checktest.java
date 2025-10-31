@@ -1,0 +1,35 @@
+import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.*;
+import java.awt.event.*;
+public class checktest extends JFrame implements ActionListener{
+	private JCheckBox cb1, cb2;
+	private JButton judge;
+	private JPanel panel0;
+	public checktest(){
+		this.cb1 = new JCheckBox("数学が得意");
+		this.cb2 = new JCheckBox("英語が得意", true);
+		this.judge = new JButton("判定");
+		JPanel panel0 = new JPanel();
+		panel0.add(this.cb1);
+		panel0.add(this.cb2);
+		this.judge.addActionListener(this);
+		panel0.add(this.judge);
+		super.getContentPane().add(panel0);
+	}
+
+	public void actionPerformed(ActionEvent e){
+		if (e.getSource() == this.judge) { 
+		if (this.cb1.isSelected() == true && this.cb2.isSelected() == false) {
+        		System.out.println("いいですね! でも英語も重要ですよ!");
+    			}
+		}
+	}
+
+	public static void main(String[] args){
+		checktest a = new checktest();
+		a.setSize(300, 300);
+		a.setLocation(0,0);
+		a.setVisible(true);
+	}
+}
