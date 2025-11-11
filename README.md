@@ -1,2 +1,3 @@
 # java_kadai
-http://jsuri1.info.kushiro-ct.ac.jp/~tenmo/java/
+Java assignments for school
+ディレクトリ整理予定
