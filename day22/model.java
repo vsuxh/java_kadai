@@ -13,7 +13,6 @@ public class model{
 		rand = random.nextInt(11)+10;
 		reset();
 	}
-
 	private void changecell(int row, int col){
         	if (board[row][col] == true){board[row][col] = false;}
         	else {board[row][col] = true;}
@@ -24,6 +23,7 @@ public class model{
 		if (col+1 <=3) changecell(row, col+1);
 		if (row-1 >=0) changecell(row-1, col);
 		if (col-1 >=0) changecell(row, col-1);
+		isCleared();
 	}
 
 	private void reset(){
