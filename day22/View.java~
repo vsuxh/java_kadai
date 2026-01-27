@@ -1,0 +1,29 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class View extends JPanel {
+    private Model model;
+    private final int CELL_SIZE = 80;
+
+    public View(Model model) {
+        this.model = model;
+        setPreferredSize(new Dimension(320, 320));
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        boolean[][] board = model.getBoard();
+
+        for (int r = 0; r < 4; r++) {
+            for (int c = 0; c < 4; c++) {
+                g.setColor(board[r][c] ? Color.YELLOW : Color.BLACK);
+                g.fillRect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+
+                g.setColor(Color.GRAY);
+                g.drawRect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+            }
+        }
+    }
+}
+ 
