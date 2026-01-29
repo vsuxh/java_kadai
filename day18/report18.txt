@@ -1,0 +1,144 @@
+4j 21番 高島 唯琉 テーマ18 レポート
+
+1.
+import javax.swing.*;
+import java.awt.*;
+
+public class MyPanel extends JPanel {
+
+    public MyPanel() {
+        setBackground(Color.black);
+        setPreferredSize(new Dimension(400, 300));
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        g.setColor(Color.green);
+        g.drawOval(100, 80, 150, 100);   // 円（楕円）
+        g.drawRect(50, 50, 80, 60);      // 四角形
+        g.drawString("Graphics Sample", 120, 50);
+    }
+}
+
+import javax.swing.*;
+
+public class MyFrame extends JFrame {
+
+    public MyFrame() {
+        MyPanel mp = new MyPanel();
+        add(mp);
+
+        setTitle("課題1 グラフィックス描画");
+        pack();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new MyFrame();
+    }
+}
+
+2.
+import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.*;
+
+public class SliderSample extends JFrame implements ChangeListener {
+
+    private JSlider slider;
+    private JTextField tf;
+
+    public SliderSample() {
+        slider = new JSlider(0, 100, 50);
+        tf = new JTextField(5);
+        tf.setText("" + slider.getValue());
+
+        slider.addChangeListener(this);
+
+        JPanel p = new JPanel();
+        p.add(slider);
+        p.add(tf);
+
+        add(p);
+        setTitle("課題2 スライダー連携");
+        setSize(400, 100);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public void stateChanged(ChangeEvent e) {
+        int val = slider.getValue();
+        tf.setText("" + val);
+    }
+
+    public static void main(String[] args) {
+        new SliderSample();
+    }
+}
+
+3.
+import javax.swing.*;
+import java.awt.*;
+
+public class MyPanel extends JPanel {
+
+    private int size = 50;
+
+    public MyPanel() {
+        setBackground(Color.white);
+        setPreferredSize(new Dimension(400, 300));
+    }
+
+    public void setSizeValue(int size) {
+        this.size = size;
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.blue);
+        g.drawOval(200 - size / 2, 150 - size / 2, size, size);
+    }
+}
+
+import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.*;
+
+public class MyFrame extends JFrame implements ChangeListener {
+
+    private MyPanel mp;
+    private JSlider slider;
+
+    public MyFrame() {
+        mp = new MyPanel();
+        slider = new JSlider(10, 200, 50);
+
+        slider.addChangeListener(this);
+
+        add(mp, BorderLayout.CENTER);
+        add(slider, BorderLayout.SOUTH);
+
+        setTitle("課題3 図形の拡大縮小");
+        pack();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public void stateChanged(ChangeEvent e) {
+        int val = slider.getValue();
+        mp.setSizeValue(val);
+        mp.repaint();
+    }
+
+    public static void main(String[] args) {
+        new MyFrame();
+    }
+}
+
+拡大縮小どちらも行えるようにした
+
+4.
+
+
