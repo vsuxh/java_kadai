@@ -37,4 +37,117 @@ public class checktest extends JFrame implements ActionListener{
         }
 }
 
-newで新しくJCheckBoxのメモリを確保し、その中にチェックボックス状態を格納している
+newで新しくJCheckBoxのメモリを確保し、その中にチェックボックスの選択状態を格納している
+
+2.
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class RadioButtonTest extends JFrame implements ActionListener {
+
+    private JRadioButton rb1, rb2, rb3;
+    private JButton kettei;
+
+    public RadioButtonTest() {
+        super("ラジオボタンテスト");
+
+        rb1 = new JRadioButton("就職");
+        rb2 = new JRadioButton("専攻科進学");
+        rb3 = new JRadioButton("大学編入学", true);
+
+        // グループ化（排他制御）
+        ButtonGroup group = new ButtonGroup();
+        group.add(rb1);
+        group.add(rb2);
+        group.add(rb3);
+
+        kettei = new JButton("進路決定");
+        kettei.addActionListener(this);
+
+        JPanel panel = new JPanel();
+        panel.add(rb1);
+        panel.add(rb2);
+        panel.add(rb3);
+        panel.add(kettei);
+
+        this.add(panel);
+        this.setSize(350, 150);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == kettei) {
+            if (rb1.isSelected()) {
+                System.out.println("実習系科目には特にしっかり取り組みましょう!");
+            } else if (rb2.isSelected()) {
+                System.out.println("さらに専門性を高めましょう!");
+            } else if (rb3.isSelected()) {
+                System.out.println("受験勉強を計画的に進めましょう!");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new RadioButtonTest();
+    }
+}
+
+登録されたラジオボタン同士を監視して状態を制御している
+
+3.
+import javax.swing.*;
+import java.awt.event.*;
+
+public class SurveyGUI extends JFrame implements ActionListener {
+
+    private JCheckBox math, english;
+    private JRadioButton morning, night;
+    private JButton result;
+
+    public SurveyGUI() {
+        super("学習タイプ診断");
+
+        math = new JCheckBox("数学が好き");
+        english = new JCheckBox("英語が好き");
+
+        morning = new JRadioButton("朝型", true);
+        night = new JRadioButton("夜型");
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(morning);
+        group.add(night);
+
+        result = new JButton("診断する");
+        result.addActionListener(this);
+
+        JPanel p = new JPanel();
+        p.add(math);
+        p.add(english);
+        p.add(morning);
+        p.add(night);
+        p.add(result);
+
+        add(p);
+        setSize(350, 150);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String msg = "";
+
+        if (math.isSelected()) msg += "論理的思考タイプ\n";
+        if (english.isSelected()) msg += "言語感覚タイプ\n";
+        if (morning.isSelected()) msg += "朝の方が集中できます\n";
+        if (night.isSelected()) msg += "夜に力を発揮します\n";
+
+        JOptionPane.showMessageDialog(this, msg);
+    }
+
+    public static void main(String[] args) {
+        new SurveyGUI();
+    }
+}
+このプログラムは、チェックボックスとラジオボタンを使って利用者の学習タイプを簡単に診断するGUIアプリである。
