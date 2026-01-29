@@ -1,0 +1,156 @@
+4j 21番 高島 唯琉 テーマ11 レポート
+
+1.
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class TextAppendGUI extends JFrame implements ActionListener {
+
+    private JTextField tf1;
+    private JTextArea ta1;
+
+    public TextAppendGUI() {
+        super("入力追加GUI");
+
+        tf1 = new JTextField(20);
+        ta1 = new JTextArea(10, 30);
+
+        tf1.addActionListener(this); // Enterキーでイベント発生
+
+        JPanel p = new JPanel();
+        p.setLayout(new BorderLayout());
+        p.add(tf1, BorderLayout.NORTH);
+        p.add(new JScrollPane(ta1), BorderLayout.CENTER);
+
+        add(p);
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == tf1) {
+            String s = tf1.getText();        // 入力取得
+            ta1.append(s);                  // テキストエリアへ追加
+            ta1.append(System.getProperty("line.separator")); // 改行
+            tf1.setText("");                // 入力欄クリア
+        }
+    }
+
+    public static void main(String[] args) {
+        new TextAppendGUI();
+    }
+}
+
+2.
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+
+public class FileViewerGUI extends JFrame implements ActionListener {
+
+    private JTextField tfFile;
+    private JButton openBtn;
+    private JTextArea ta;
+
+    public FileViewerGUI() {
+        super("ファイルビューア");
+
+        tfFile = new JTextField(20);
+        openBtn = new JButton("開く");
+        ta = new JTextArea(15, 40);
+
+        openBtn.addActionListener(this);
+
+        JPanel top = new JPanel();
+        top.add(new JLabel("ファイル名:"));
+        top.add(tfFile);
+        top.add(openBtn);
+
+        add(top, BorderLayout.NORTH);
+        add(new JScrollPane(ta), BorderLayout.CENTER);
+
+        setSize(500, 400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == openBtn) {
+            String filename = tfFile.getText();
+            String all = "";
+
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(filename));
+                String buf;
+                while ((buf = br.readLine()) != null) {
+                    all += buf + System.getProperty("line.separator");
+                }
+                br.close();
+                ta.setText(all);
+
+            } catch (IOException ex) {
+                ta.setText("ファイル読込みエラー");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new FileViewerGUI();
+    }
+}
+
+3.
+private JButton saveBtn;
+----------------------------------------
+#コンストラクタ内
+saveBtn = new JButton("保存");
+saveBtn.addActionListener(this);
+top.add(saveBtn);  // 上のパネルに追加
+----------------------------------------
+if (e.getSource() == saveBtn) {
+    String filename = tfFile.getText();
+    String text = ta.getText();
+
+
+4.  
+try {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
+        bw.write(text);import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+
+public class TextEditorPlus extends JFrame implements ActionListener {
+
+    private JTextField tfFile;
+    private JButton openBtn, saveBtn;
+    private JTextArea ta;
+    private JLabel status;
+
+    public TextEditorPlus() {
+        super("かんたんテキストエディタ");
+
+        // ===== 部品生成 =====
+        tfFile = new JTextField(20);
+        openBtn = new JButton("開く");
+        saveBtn = new JButton("保存");
+        ta = new JTextArea(20, 50);
+        status = new JLabel("準備完了");
+
+        // ===== イベント登録 =====
+        openBtn.addActionListener(this);
+        saveBtn.
+
+        bw.close();
+        ta.append("保存しました\n");
+    } catch (IOException ex) {
+        ta.append("保存エラー\n");
+    }
+}
+長い文章でもスクロールして閲覧できるようにした
+将来は文字検索機能を実装したい
+
+
